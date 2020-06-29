@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Kind</key>
+    <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+    <key>Identifier</key>
+    <string>com.apple.dt.unit.documentBasedViewApplication</string>
+    <key>Ancestors</key>
+    <array>
+        <string>com.apple.dt.unit.cocoaTouchApplicationBase</string>
+    </array>
+    <key>Concrete</key>
+    <true/>
+    <key>Description</key>
+    <string>This template provides a starting point for a document-based application.</string>
+    <key>SortOrder</key>
+    <integer>15</integer>
+    <key>Options</key>
+    <array>
+        <dict>
+            <key>Identifier</key>
+            <string>languageChoice</string>
+            <key>Units</key>
+            <dict>
+                <key>Objective-C</key>
+                <dict>
+                    <key>Nodes</key>
+                    <array>
+                        <string>AppDelegate.m:imports:importHeader:DocumentBrowserViewController.h</string>
+                        <string>AppDelegate.m:imports:importHeader:DocumentViewController.h</string>
+                        <string>AppDelegate.m:imports:importHeader:Document.h</string>
+                        <string>AppDelegate.m:implementation:methods:applicationOpen(- (BOOL\)application:(UIApplication *\)app openURL:(NSURL *\)inputURL options:(NSDictionary&lt;UIApplicationOpenURLOptionsKey, id&gt; *\)options)</string>
+                        <string>AppDelegate.m:implementation:methods:applicationOpen:body</string>
+                        <string>DocumentBrowserViewController.h</string>
+                        <string>DocumentBrowserViewController.m</string>
+                        <string>DocumentViewController.h</string>
+                        <string>DocumentViewController.m</string>
+                        <string>Document.h</string>
+                        <string>Document.m</string>
+                    </array>
+                    <key>Definitions</key>
+                    <dict>
+                        <key>AppDelegate.m:implementation:methods:applicationOpen:body</key>
+                        <string>// Ensure the URL is a file URL
+if (!inputURL.isFileURL) {
+    return NO;
+}
+
+// Reveal / import the document at the URL
+DocumentBrowserViewController *documentBrowserViewController = (DocumentBrowserViewController *)self.window.rootViewController;
+[documentBrowserViewController revealDocumentAtURL:inputURL importIfNeeded:YES completion:^(NSURL * _Nullable revealedDocumentURL, NSError * _Nullable error) {
+    if (error) {
+        // Handle the error appropriately
+        NSLog(@"Failed to reveal the document at URL %@ with error: '%@'", inputURL, error);
+        return;
+    }
+    
+    // Present the Document View Controller for the revealed URL
+    [documentBrowserViewController presentDocumentAtURL:revealedDocumentURL];
+}];
+return YES;</string>
+                        <key>DocumentBrowserViewController.h</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentBrowserViewController.h</string>
+                        </dict>
+                        <key>DocumentBrowserViewController.m</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentBrowserViewController.m</string>
+                        </dict>
+                        <key>DocumentViewController.h</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentViewController.h</string>
+                        </dict>
+                        <key>DocumentViewController.m</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentViewController.m</string>
+                        </dict>
+                        <key>Document.h</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Document.h</string>
+                        </dict>
+                        <key>Document.m</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Document.m</string>
+                        </dict>
+                        <key>Base.lproj/Main.storyboard</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Main.storyboard</string>
+                            <key>SortOrder</key>
+                            <integer>99</integer>
+                        </dict>
+                    </dict>
+                </dict>
+                <key>Swift</key>
+                <array>
+                <dict>
+                    <key>Nodes</key>
+                    <array>
+                        <string>AppDelegate.swift:implementation:methods:applicationOpen(func application(_ app: UIApplication, open inputURL: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]\) -> Bool)</string>
+                        <string>AppDelegate.swift:implementation:methods:applicationOpen:body</string>
+                    </array>
+                    <key>Definitions</key>
+                    <dict>
+                        <key>AppDelegate.swift:implementation:methods:applicationOpen:body</key>
+                        <string>// Ensure the URL is a file URL
+guard inputURL.isFileURL else { return false }
+        
+// Reveal / import the document at the URL
+guard let documentBrowserViewController = window?.rootViewController as? DocumentBrowserViewController else { return false }
+
+documentBrowserViewController.revealDocument(at: inputURL, importIfNeeded: true) { (revealedDocumentURL, error) in
+    if let error = error {
+        // Handle the error appropriately
+        print("Failed to reveal the document at URL \(inputURL) with error: '\(error)'")
+        return
+    }
+    
+    // Present the Document View Controller for the revealed URL
+    documentBrowserViewController.presentDocument(at: revealedDocumentURL!)
+}
+
+return true</string>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>RequiredOptions</key>
+                    <dict>
+                        <key>userInterface</key>
+                        <string>Storyboard</string>
+                    </dict>
+                    <key>Nodes</key>
+                    <array>
+                        <string>DocumentBrowserViewController.swift</string>
+                        <string>DocumentViewController.swift</string>
+                        <string>Document.swift</string>
+                    </array>
+                    <key>Definitions</key>
+                    <dict>
+                        <key>DocumentBrowserViewController.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentBrowserViewController.swift</string>
+                        </dict>
+                        <key>DocumentViewController.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentViewController.swift</string>
+                        </dict>
+                        <key>Document.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Document.swift</string>
+                        </dict>
+                        <key>Base.lproj/Main.storyboard</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Main.storyboard</string>
+                            <key>SortOrder</key>
+                            <integer>99</integer>
+                        </dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>RequiredOptions</key>
+                    <dict>
+                        <key>userInterface</key>
+                        <string>SwiftUI</string>
+                    </dict>
+                    <key>Nodes</key>
+                    <array>
+                        <string>DocumentBrowserViewController.swift</string>
+                        <string>DocumentView.swift</string>
+                        <string>Document.swift</string>
+                    </array>
+                    <key>Definitions</key>
+                    <dict>
+                        <key>DocumentBrowserViewController.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentBrowserViewController-SwiftUI.swift</string>
+                        </dict>
+                        <key>DocumentView.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>DocumentView.swift</string>
+                        </dict>
+                        <key>Document.swift</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Document.swift</string>
+                        </dict>
+                        <key>Base.lproj/Main.storyboard</key>
+                        <dict>
+                            <key>Path</key>
+                            <string>Main-SwiftUI.storyboard</string>
+                            <key>SortOrder</key>
+                            <integer>99</integer>
+                        </dict>
+                    </dict>
+                </dict>
+                </array>
+            </dict>
+        </dict>
+        <dict>
+            <key>Identifier</key>
+            <string>userInterface</string>
+            <key>Name</key>
+            <string>User Interface:</string>
+            <key>Description</key>
+            <string>The type of user interface.</string>
+            <key>Values</key>
+            <array>
+                <string>SwiftUI</string>
+                <string>Storyboard</string>
+            </array>
+            <key>RequiredOptionsForValues</key>
+            <dict>
+                <key>SwiftUI</key>
+                <dict>
+                    <key>languageChoice</key>
+                    <string>Swift</string>
+                </dict>
+            </dict>
+            <key>Default</key>
+            <string>SwiftUI</string>
+            <key>Type</key>
+            <string>popup</string>
+        </dict>
+    </array>
+    <key>Nodes</key>
+    <array>
+        <string>Info.plist:UIMainStoryboardFile</string>
+        <string>Info.plist:DocBased</string>
+        <string>Base.lproj/Main.storyboard</string>
+    </array>
+    <key>Definitions</key>
+    <dict>
+        <key>Info.plist:UIMainStoryboardFile</key>
+        <string><![CDATA[<key>UIMainStoryboardFile</key>
+<string>Main</string>
+]]></string>
+        <key>Info.plist:DocBased</key>
+        <string><![CDATA[<key>CFBundleDocumentTypes</key>
+<array>
+    <dict>
+        <key>CFBundleTypeIconFiles</key>
+        <array/>
+        <key>CFBundleTypeName</key>
+        <string>Images</string>
+        <key>LSHandlerRank</key>
+        <string>Alternate</string>
+        <key>CFBundleTypeRole</key>
+        <string>Viewer</string>
+        <key>LSItemContentTypes</key>
+        <array>
+            <string>public.image</string>
+        </array>
+    </dict>
+</array>
+<key>UISupportsDocumentBrowser</key>
+<true/>
+<key>UTImportedTypeDeclarations</key>
+<array>
+    <dict/>
+</array>
+]]></string>
+    </dict>
+</dict>
+</plist>
